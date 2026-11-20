@@ -11,6 +11,9 @@ export default defineConfig({
 
   use: {
     headless: false,
+    launchOptions: {
+      slowMo: 1000, // Pauses 1 second between each action
+    },
   },
   projects: [
     {

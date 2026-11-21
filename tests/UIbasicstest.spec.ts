@@ -19,7 +19,9 @@ test.only ('Browser context Playwright test', async ({ browser }) =>
   await username.fill(''); //clear the username field
   await username.fill('standard_user'); //type is deprecated, use fill instead (correct username given)
   await signinbtn.click(); // Click on element
-  console.log(await page.locator('[data-test="inventory-item-name"]').textContent());
+  //console.log(await page.locator('[data-test="inventory-item-name"]').textContent()); //multiple elements with same locator
+    console.log(await page.locator('[data-test="inventory-item-name"]').first().textContent()); //nth(0) or first() is used to get the first element from the list of elements with the same locator
+  console.log(await page.locator('[data-test="inventory-item-name"]').nth(1).textContent()); //nth(1) is used to get the second element from the list of elements with the same locator
 });
 
 test ('Page Playwright test', async ({ page }) => //By using test.only, we can run only this test and ignore other tests in the file. This is useful for debugging a single test case.

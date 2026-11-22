@@ -5,8 +5,9 @@ test.only ('Browser context Playwright test', async ({ browser }) =>
   // chrome - plugins/cookies
   const context = await browser.newContext(); // incognito mode
   const page = await context.newPage(); // new page and capture page in const page
-  const username = page.locator ('#user-name')
+  const username = page.locator ('#user-name') //creating page object classes for username field
   const signinbtn = page.locator ("#login-button")
+  const inventoryItems = page.locator('[data-test="inventory-item-name"]');
   await page.goto('https://www.saucedemo.com');
   console.log (await page.title());
   //css
@@ -20,8 +21,10 @@ test.only ('Browser context Playwright test', async ({ browser }) =>
   await username.fill('standard_user'); //type is deprecated, use fill instead (correct username given)
   await signinbtn.click(); // Click on element
   //console.log(await page.locator('[data-test="inventory-item-name"]').textContent()); //multiple elements with same locator
-    console.log(await page.locator('[data-test="inventory-item-name"]').first().textContent()); //nth(0) or first() is used to get the first element from the list of elements with the same locator
-  console.log(await page.locator('[data-test="inventory-item-name"]').nth(1).textContent()); //nth(1) is used to get the second element from the list of elements with the same locator
+    console.log(await inventoryItems.first().textContent()); //nth(0) or first() is used to get the first element from the list of elements with the same locator
+  console.log(await inventoryItems.nth(1).textContent()); //nth(1) is used to get the second element from the list of elements with the same locator
+  const allItems = await inventoryItems.allTextContents(); //allTextContents() is used to get the text content of all elements with the same locator
+  console.log (allItems);
 });
 
 test ('Page Playwright test', async ({ page }) => //By using test.only, we can run only this test and ignore other tests in the file. This is useful for debugging a single test case.
